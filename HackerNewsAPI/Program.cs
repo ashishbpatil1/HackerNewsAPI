@@ -1,8 +1,16 @@
 using HackerNewsAPI.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+    .AddEnvironmentVariables()
+    .AddCommandLine(args);
 // Add services to the container.
 builder.Services.AddMemoryCache(); // For in-memory caching
 builder.Services.AddResponseCaching(); // Add response caching services
@@ -19,6 +27,18 @@ builder.Services.AddSwaggerGen(c =>
         Title = "HackerNews API",
         Version = "v1",
         Description = "HackerNews API extention"
+    });
+});
+// Read the AllowSpecificOrigin configuration.
+var allowSpecificOrigin = builder.Configuration.GetValue<string>("AllowSpecificOrigin");
+// Configure CORS to use the AllowSpecificOrigin setting.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("SpecificOriginPolicy", policy =>
+    {
+        policy.WithOrigins(allowSpecificOrigin)
+              .AllowAnyHeader()
+              .AllowAnyMethod();
     });
 });
 
@@ -39,7 +59,7 @@ app.UseSwaggerUI(c =>
 
 app.UseRouting();
 
-app.UseCors("AllowSpecificOrigin");
+app.UseCors("SpecificOriginPolicy");
 
 app.UseHttpsRedirection();
 

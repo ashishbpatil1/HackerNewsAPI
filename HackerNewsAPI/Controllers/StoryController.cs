@@ -1,13 +1,15 @@
 using HackerNewsAPI.Models;
 using HackerNewsAPI.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.VisualBasic;
 
 namespace HackerNewsAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [EnableCors("SpecificOriginPolicy")]
     public class StoryController : ControllerBase
     {
         private readonly ILogger<StoryController> _logger;
