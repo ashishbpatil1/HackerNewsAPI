@@ -32,21 +32,19 @@ Endpoint: GET /api/story
 Description: Retrieves the top 200 story details from HackerNews.
 Response: A list of story details.
 
-**Caching**
+**Caching:**
 The API uses in-memory caching to store the top stories for a specified duration. The cache is invalidated and refreshed when a new HTTP call happens.
 
-**Error Handling**
+**Error Handling:**
 The API handles various exceptions and logs errors for debugging purposes.
 
-**Unit Tests**
+**Unit Tests:**
 To run the unit tests, use the following command:
 dotnet test
 
-**Swagger UI**
+**Swagger UI:**
 Swagger UI is enabled for this project. To access the API documentation, navigate to 
 '[This URL](https://localhost:7102/swagger/ui/index.html)' in your browser.
 
-**License**
+**License:**
 This project is licensed under the MIT License.
-
-
