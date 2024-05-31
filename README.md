@@ -13,7 +13,7 @@ This project is an ASP.NET Core API that fetches and serves HackerNews stories. 
 
 1. **Clone the Repository:**
    Use following link to clone the app in visual studio:
-   https://github.com/ashishbpatil1/hackernews-api.git
+   [https://github.com/ashishbpatil1/HackerNewsAPI](https://github.com/ashishbpatil1/HackerNewsAPI)
 
 2. **Restore dependencies:**
    dotnet restore
